@@ -1,3 +1,4 @@
+import NoProjectInfo from "./components/NoProjectInfo";
 import SideBar from "./components/SideBar";
 
 function App() {
@@ -5,6 +6,7 @@ function App() {
     <>
       <main className="h-screen my-8 flex gap-8">
         <SideBar />
+        <NoProjectInfo />
       </main>
     </>
   );
