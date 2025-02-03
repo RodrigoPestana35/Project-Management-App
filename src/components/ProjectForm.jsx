@@ -19,6 +19,7 @@ export default function ProjectForm({ setProjects, setCreateProject }) {
       setProjects((oldProjects) => {
         return [...oldProjects, { title, description, dueDate }];
       });
+      setCreateProject(false);
 
       titleRef.current.value = "";
       descriptionRef.current.value = "";
