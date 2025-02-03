@@ -13,7 +13,7 @@ function App() {
     <>
       <main className="h-screen my-8 flex gap-8">
         <SideBar setCreateProject={setCreateProject} projects={projects} setInProject={setInProject}/>
-        {createProject ? <ProjectForm setProjects={setProjects} setCreateProject={setCreateProject}/> : (inProject ? <ProjectPage project={inProject}/> : <NoProjectInfo setCreateProject={setCreateProject} />)}
+        {createProject ? <ProjectForm setProjects={setProjects} setCreateProject={setCreateProject}/> : (inProject ? <ProjectPage project={inProject} setProjects={setProjects} setInProject={setInProject}/> : <NoProjectInfo setCreateProject={setCreateProject} />)}
       </main>
     </>
   );

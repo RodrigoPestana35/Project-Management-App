@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import TaskListItem from "./TaskListItem";
 
-export default function ProjectPage({ project }) {
+export default function ProjectPage({ project, setProjects, setInProject }) {
   const [tasks, setTasks] = useState([]);
   const newTask = useRef();
 
@@ -12,11 +12,25 @@ export default function ProjectPage({ project }) {
     newTask.current.value = "";
   }
 
+  function handleDeleteProject(){
+    setProjects((oldProjects) => {
+      return oldProjects.filter((p) => p.title !== project.title);
+    });
+    setInProject(null);
+  }
+
+  function handleDeleteTask(task){
+    setTasks((oldTasks) => {
+      return oldTasks.filter((t) => t !== task);
+    });
+  }
+
   return (
     <div className="w-[35rem] mt-16">
       <h1 className="text-3xl font-bold text-stone-600 mb-2">
         {project.title}
       </h1>
+      <button onClick={handleDeleteProject} className="text-stone-600 hover:text-stone-950">Delete</button>
       <p className="text-stone-400 mb-4">{project.dueDate}</p>
       <p className="mt-8">{project.description}</p>
       <h2 className="text-2xl font-bold text-stone-700 mb-4">Tasks</h2>
@@ -28,7 +42,7 @@ export default function ProjectPage({ project }) {
         {(tasks.length > 0) && (
           <ul className="p-4 mt-8 rounded-md bg-stone-200">
             {tasks.map((task, index) => (
-              <TaskListItem key={index} task={task} />
+              <TaskListItem key={index} task={task} handleDeleteTask={handleDeleteTask}/>
             ))}
           </ul>
         )}
