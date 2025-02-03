@@ -8,7 +8,7 @@ export default function SideBar({ setCreateProject, projects }) {
         + Add Project
       </button>
       <ul className="mt-8">
-        {/* <!-- Project Item --> */}
+        {/* <!-- Projects List --> */}
         {projects.map((project, index) => (
           <li key={index} className="my-4">
             <h3>{project}</h3>
