@@ -1,4 +1,6 @@
-export default function SideBar({ setCreateProject, projects }) {
+import ProjectListItem from "./ProjectListItem";
+
+export default function SideBar({ setCreateProject, projects, setInProject }) {
   return (
     <aside className="w-1/3 px-8 py-16 bg-stone-900 text-stone-50 md:w-72 rounded-r-xl">
       <h2 className="mb-8 font-bold uppercase md:text-xl text-stone-200">
@@ -10,9 +12,7 @@ export default function SideBar({ setCreateProject, projects }) {
       <ul className="mt-8">
         {/* <!-- Projects List --> */}
         {projects.map((project, index) => (
-          <li key={index} className="flex justify-between my-4">
-            <h3>{project.title}</h3>
-          </li>
+          <ProjectListItem key={index} project={project} setInProject={setInProject}/>
         ))}
       </ul>
     </aside>

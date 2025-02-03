@@ -6,13 +6,14 @@ import ProjectPage from './components/ProjectPage';
 
 function App() {
   const [createProject, setCreateProject] = useState(false);
-  const [inProject, setInProject] = useState(false);
+  const [inProject, setInProject] = useState();
   const [projects, setProjects] = useState([]);
+  
   return (
     <>
       <main className="h-screen my-8 flex gap-8">
-        <SideBar setCreateProject={setCreateProject} projects={projects}/>
-        {createProject ? <ProjectForm setProjects={setProjects} setCreateProject={setCreateProject}/> : (inProject ? <ProjectPage/> : <NoProjectInfo setCreateProject={setCreateProject} />)}
+        <SideBar setCreateProject={setCreateProject} projects={projects} setInProject={setInProject}/>
+        {createProject ? <ProjectForm setProjects={setProjects} setCreateProject={setCreateProject}/> : (inProject ? <ProjectPage project={inProject}/> : <NoProjectInfo setCreateProject={setCreateProject} />)}
       </main>
     </>
   );
