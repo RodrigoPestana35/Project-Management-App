@@ -10,8 +10,8 @@ export default function SideBar({ setCreateProject, projects }) {
       <ul className="mt-8">
         {/* <!-- Projects List --> */}
         {projects.map((project, index) => (
-          <li key={index} className="my-4">
-            <h3>{project}</h3>
+          <li key={index} className="flex justify-between my-4">
+            <h3>{project.title}</h3>
           </li>
         ))}
       </ul>
