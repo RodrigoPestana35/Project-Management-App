@@ -14,7 +14,7 @@ function App() {
     setProjectsState(prevState => {
       return{
         ...prevState,
-        selectedProject: projectId
+        selectedProject: projectId  //seleciona o projeto com base no id do projeto selecionado
       }
     })
   }
@@ -52,12 +52,22 @@ function App() {
     })
   }
 
+  function handleDeleteProject(){
+    setProjectsState(prevState => {
+      return{
+        ...prevState,
+        projects: prevState.projects.filter(project => project.id !== prevState.selectedProject),
+        selectedProject: undefined  //undefined significa que não estamos a fazer nada
+      }
+    })
+  }
+
   // encontra o projeto selecionado com base no id do projeto selecionado no estado
   const selectedProject = projectsState.projects.find(project => project.id === projectsState.selectedProject);
 
   // variável content que armazena o componente a ser renderizado com base no estado do projeto selecionado
   // por padrão, o componente a ser renderizado é o componente SelectedProject
-  let content = <SelectedProject project={selectedProject} />;
+  let content = <SelectedProject project={selectedProject} onDeleteProject={handleDeleteProject} />;
 
   if(projectsState.selectedProject === null){
     content = <NewProject onAdd={handleAddProject} onCancel={handleCancelAddProject}/>
@@ -67,7 +77,7 @@ function App() {
 
   return (
     <main className="h-screen my-8 flex gap-8">
-      <SideBar onStartAddProject={handleStartAddProject} projects={projectsState.projects} onSelectProject={handleSelectProject} selectedProjectId={selectedProject.id}/>
+      <SideBar onStartAddProject={handleStartAddProject} projects={projectsState.projects} onSelectProject={handleSelectProject} selectedProjectId={projectsState.selectedProject}/>
       {content}
     </main>
   );
