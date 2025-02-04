@@ -9,6 +9,15 @@ function App() {
     projects: []
   });
 
+  function handleSelectProject(projectId) {
+    setProjectsState(prevState => {
+      return{
+        ...prevState,
+        selectedProject: projectId
+      }
+    })
+  }
+
   function handleStartAddProject() {
     setProjectsState(prevState => {
       return{
@@ -51,7 +60,7 @@ function App() {
 
   return (
     <main className="h-screen my-8 flex gap-8">
-      <SideBar onStartAddProject={handleStartAddProject} projects={projectsState.projects}/>
+      <SideBar onStartAddProject={handleStartAddProject} projects={projectsState.projects} onSelectProject={handleSelectProject}/>
       {content}
     </main>
   );
