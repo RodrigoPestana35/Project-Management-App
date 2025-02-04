@@ -18,7 +18,7 @@ export default function SelectedProject({ project, onDeleteProject, onAddTask, o
           {project.description}
         </p>
       </header>
-      <Tasks onAddTask={onAddTask} onDeleteTask={onDeleteTask} tasks={tasks} />
+      <Tasks onAddTask={onAddTask} onDeleteTask={onDeleteTask} tasks={tasks} projectId={project.id} />
     </div>
   );
 }
