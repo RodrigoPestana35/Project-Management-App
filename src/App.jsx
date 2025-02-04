@@ -7,8 +7,34 @@ import SelectedProject from "./components/SelectedProject";
 function App() {
   const [projectsState, setProjectsState] = useState({
     selectedProject: undefined,  //undefined significa que não estamos a fazer nada
-    projects: []
+    projects: [],
+    tasks: []
   });
+
+  function handleAddTask(text){
+    setProjectsState(prevState => {
+      const taskId = Math.random();
+      const newTask = {
+        id: taskId,
+        text: text,
+        projectId: prevState.selectedProject
+      }
+      return{
+        ...prevState,
+        tasks: [newTask, ...prevState.tasks]
+      }
+    })
+    console.log(projectsState.tasks)
+  }
+
+  function handleDeleteTask(taskId){
+    setProjectsState(prevState => {
+      return{
+        ...prevState,
+        tasks: prevState.tasks.filter(task => task.id !== taskId)
+      }
+    })
+  }
 
   function handleSelectProject(projectId) {
     setProjectsState(prevState => {
@@ -67,7 +93,7 @@ function App() {
 
   // variável content que armazena o componente a ser renderizado com base no estado do projeto selecionado
   // por padrão, o componente a ser renderizado é o componente SelectedProject
-  let content = <SelectedProject project={selectedProject} onDeleteProject={handleDeleteProject} />;
+  let content = <SelectedProject project={selectedProject} onDeleteProject={handleDeleteProject} onAddTask={handleAddTask} onDeleteTask={handleDeleteTask} tasks={projectsState.tasks}/>;
 
   if(projectsState.selectedProject === null){
     content = <NewProject onAdd={handleAddProject} onCancel={handleCancelAddProject}/>
